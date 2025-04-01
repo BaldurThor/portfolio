@@ -1,18 +1,35 @@
-import Link from "next/link";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { usePathname } from "next/navigation";
 
-const Header: React.FC = (selected_component, all_components) => {
+const Header: React.FC = ({ title }) => {
+  const pathname = usePathname().split('/');
+
+  const pathNavItems = pathname.slice(0, -1);
+
+  const navItems = pathNavItems.map((item) =>
+    <Nav.Link href={"/".concat(item)} > {item}</Nav.Link >
+  )
+
   return (
-    <header className="d-flex justify-content-between align-items-md-center pb-3 mb-5 border-bottom">
-      <h1 className="h4">
-        <Link
-          href="/"
-          className="d-flex align-items-center text-dark text-decoration-none"
-        >
-          <span>Portfolio</span>
-        </Link>
-      </h1>
-    </header>
+    <header className="border-bottom">
+      <Navbar>
+        <Container>
+          {pathname.at(-1) ?
+            <>
+              <Navbar.Brand href="/">{title}</Navbar.Brand>
+              <Nav className="me-auto">
+                {navItems}
+                <Nav.Link>{pathname.at(-1)}</Nav.Link>
+              </Nav>
+            </>
+            : <Navbar.Brand>{title}</Navbar.Brand>}
+        </Container>
+      </Navbar>
+    </header >
   );
 };
 
 export default Header;
+

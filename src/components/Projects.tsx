@@ -1,8 +1,11 @@
 const Projects: React.FC = () => {
   return (
     <div>
-      <p className="h5">Projects</p>
-      <p>asdf</p>
+      <a className="h5">Projects</a>
+      <br />
+      <a href="projects/guitar">guitar</a>
+      <br />
+      <a href="projects/server">server</a>
     </div>
   );
 };
